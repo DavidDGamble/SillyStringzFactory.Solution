@@ -91,5 +91,21 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = joinEntity.MachineId });
     }
+
+    [HttpGet("/machines/{id}/delete")]
+    public ActionResult Delete(int id)
+    {
+      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      return View(thisMachine);
+    }
+
+    [HttpPost("/machines/{id}/delete")]
+    public ActionResult DeleteConfirm(int id)
+    {
+      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      _db.Machines.Remove(thisMachine);
+      _db.SaveChanges();
+      return RedirectToAction("Index", "Home");
+    }
   }
 }
