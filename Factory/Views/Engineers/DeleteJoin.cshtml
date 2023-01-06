@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+@await Html.PartialAsync("Footer")
+
+@model Factory.Models.EngineerMachine
+
+<h2>Are you sure you want to remove this machine?</h2>
+
+<h4>@ViewBag.MachineName</h4>
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" class="btn btn-danger"/>
+}
