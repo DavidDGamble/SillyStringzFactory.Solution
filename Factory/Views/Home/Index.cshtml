@@ -5,6 +5,7 @@
 @using Factory.Models
 
 <h3 style="text-align: center;">Welcome to Dr. Silly Stringz HQ!</h3>
+<hr>
 
 <div class="row">
 
@@ -20,11 +21,11 @@
       <ul>
         @foreach (Engineer engineer in ViewBag.engineers)
         {
-          <li>@Html.ActionLink($"{engineer.Name}", "Details", new {id = engineer.EngineerId})</li>
+          <li>@Html.ActionLink($"{engineer.Name}", "Details", "Engineers", new {id = engineer.EngineerId})</li>
         }
       </ul>
     }
-    <p>@Html.ActionLink("Add a new engineer!", "Create")</p>
+    <p>@Html.ActionLink("Add a new engineer!", "Create", "Engineers")</p>
   </div>
 
   <div class="col-6">
@@ -32,17 +33,17 @@
 
     @if (@ViewBag.machines.Count == 0)
     {
-      <h4>No engineers have been added yet!</h4>
+      <h4>No machines have been added yet!</h4>
     }
     else
     {
       <ul>
-        @foreach (Engineer engineer in ViewBag.machines)
+        @foreach (Machine machine in ViewBag.machines)
         {
-          <li>@Html.ActionLink($"{engineer.Name}", "Details", new {id = engineer.EngineerId})</li>
+          <li>@Html.ActionLink($"{machine.Name}", "Details", "Machines", new {id = machine.MachineId})</li>
         }
       </ul>
     }
-    <p>@Html.ActionLink("Add a new machine!", "Create")</p>
+    <p>@Html.ActionLink("Add a new machine!", "Create", "Machines")</p>
   </div>
 </div>

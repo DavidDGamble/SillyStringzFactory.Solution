@@ -21,6 +21,5 @@ namespace Factory.Controllers
         ViewBag.machines = machines;
         return View();
       }
-
     }
 }

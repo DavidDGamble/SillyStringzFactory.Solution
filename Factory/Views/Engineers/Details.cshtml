@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+@await Html.PartialAsync("Footer")
+
+@using Factory.Models
+@model Factory.Models.Engineer
+
+<h2 style="text-align: center;">@Model.Name</h2>
+<hr>
+
+@if (@Model.JoinEntities.Count == 0)
+{
+  <p>This engineer does not have any machines yet!</p>
+}
+else
+{
+  <h4>This engineer has the following machines:</h4>
+  <ul>
+    @foreach (EngineerMachine join in Model.JoinEntities)
+    {
+      <li>@Html.ActionLink($"{@join.Machine.Name}", "Details", "Machines", new {id = @join.Machine.MachineId})</li>
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add a machine to engineer!", "AddMachine", new { id = Model.EngineerId })</p>
