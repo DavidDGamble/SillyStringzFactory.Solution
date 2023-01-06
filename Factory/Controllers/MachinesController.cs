@@ -22,9 +22,16 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Machine machine)
     {
-      _db.Machines.Add(machine);
-      _db.SaveChanges();
-      return RedirectToAction("Index", "Home");
+      if (!ModelState.IsValid)
+      {
+        return View(machine);
+      }
+      else
+      {
+        _db.Machines.Add(machine);
+        _db.SaveChanges();
+        return RedirectToAction("Index", "Home");
+      }
     }
 
     public ActionResult Details(int id)

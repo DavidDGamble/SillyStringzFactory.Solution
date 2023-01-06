@@ -8,6 +8,7 @@
 <h4>Add a new engineer</h4>
 <hr>
 
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 @using (Html.BeginForm())
 {
   @Html.TextBoxFor(model => model.Name, new { placeholder = "Name", style = "text-align: center;"})
