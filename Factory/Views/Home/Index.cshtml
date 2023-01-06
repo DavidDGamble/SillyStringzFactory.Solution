@@ -1,3 +1,48 @@
 @{
   Layout = "_Layout";
 }
+
+@using Factory.Models
+
+<h3 style="text-align: center;">Welcome to Dr. Silly Stringz HQ!</h3>
+
+<div class="row">
+
+  <div class="col-6">
+    <h2>Engineers</h2>
+
+    @if (@ViewBag.engineers.Count == 0)
+    {
+      <h4>No engineers have been added yet!</h4>
+    }
+    else
+    {
+      <ul>
+        @foreach (Engineer engineer in ViewBag.engineers)
+        {
+          <li>@Html.ActionLink($"{engineer.Name}", "Details", new {id = engineer.EngineerId})</li>
+        }
+      </ul>
+    }
+    <p>@Html.ActionLink("Add a new engineer!", "Create")</p>
+  </div>
+
+  <div class="col-6">
+    <h2>Machines</h2>
+
+    @if (@ViewBag.machines.Count == 0)
+    {
+      <h4>No engineers have been added yet!</h4>
+    }
+    else
+    {
+      <ul>
+        @foreach (Engineer engineer in ViewBag.machines)
+        {
+          <li>@Html.ActionLink($"{engineer.Name}", "Details", new {id = engineer.EngineerId})</li>
+        }
+      </ul>
+    }
+    <p>@Html.ActionLink("Add a new machine!", "Create")</p>
+  </div>
+</div>
