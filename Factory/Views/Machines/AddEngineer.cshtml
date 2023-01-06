@@ -5,14 +5,22 @@
 
 @model Factory.Models.Machine
 
-<h2>Add a engineer to this machine: @Html.DisplayFor(model => model.Name)</h2>
-
-@using (Html.BeginForm())
+@if (@ViewBag.engineers.Count == 0)
 {
-  @Html.HiddenFor(model => model.MachineId)
+  <h3>There are currently no engineers!</h3>
+  <p>@Html.ActionLink("Add a new engineer!", "Create", "Engineers")</p>
+}
+else
+{
+  <h2>Add a engineer to this machine: @Html.DisplayFor(model => model.Name)</h2>
 
-  @Html.Label("Select engineer")
-  @Html.DropDownList("EngineerId")
+  @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.MachineId)
 
-  <input type="submit" value="Save" />
+    @Html.Label("Select engineer")
+    @Html.DropDownList("EngineerId")
+
+    <input type="submit" value="Save" />
+  }
 }
