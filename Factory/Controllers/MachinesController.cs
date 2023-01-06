@@ -30,9 +30,9 @@ namespace Factory.Controllers
     public ActionResult Details(int id)
     {
       Machine thisMachine = _db.Machines
-                              .Include(machine => machine.JoinEntities)
-                              .ThenInclude(join => join.Engineer)
-                              .FirstOrDefault(machine => machine.MachineId == id);
+        .Include(machine => machine.JoinEntities)
+        .ThenInclude(join => join.Engineer)
+        .FirstOrDefault(machine => machine.MachineId == id);
       return View(thisMachine);
     }
 
@@ -54,6 +54,24 @@ namespace Factory.Controllers
         _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineerId, MachineId = machine.MachineId });
         _db.SaveChanges();
       }
+      return RedirectToAction("Details", new { id = machine.MachineId });
+    }
+
+    [HttpGet("/machines/{id}/edit")]
+    public ActionResult Edit(int id)
+    {
+      Machine thisMachine = _db.Machines
+        .Include(machine => machine.JoinEntities)
+        .ThenInclude(join => join.Engineer) 
+        .FirstOrDefault(machine => machine.MachineId == id);
+      return View(thisMachine);
+    }
+
+    [HttpPost("/machines/{id}/edit")]
+    public ActionResult Edit(Machine machine)
+    {
+      _db.Machines.Update(machine);
+      _db.SaveChanges();
       return RedirectToAction("Details", new { id = machine.MachineId });
     }
   }

@@ -1,0 +1,39 @@
+@{
+  Layout = "_Layout";
+}
+@await Html.PartialAsync("Footer")
+
+@using Factory.Models
+@model Factory.Models.Machine
+
+<h2 style="text-align: center;">Edit: @Model.Name</h2>
+<hr>
+
+<div class="row">
+  <div class="col-6">
+    @using (Html.BeginForm())
+    {
+      @Html.HiddenFor(model => model.MachineId)
+      @Html.TextBoxFor(model => model.Name, new { placeholder = "Name", style = "text-align: center;"})
+      <br><br>
+      <input type="submit" value="Edit machine!" class="btn btn-warning" />
+    }
+  </div>
+  <div class="col-6">
+    @if (@Model.JoinEntities.Count == 0)
+    {
+      <p>This machine does not have any engineers yet!</p>
+    }
+    else
+    {
+      <h4>This machine has the following engineers:</h4>
+      <h3><strong>(Click engineer to remove)</strong></h3>
+      <ul>
+        @foreach (EngineerMachine join in Model.JoinEntities)
+        {
+          <li>@Html.ActionLink($"{@join.Engineer.Name}", "DeleteJoin", new { id = @join.Engineer.EngineerId }, new { style = "color: red;" })</li>
+        }
+      </ul>
+    }
+  </div>
+</div>
